@@ -1,0 +1,18 @@
+# Enable pretty printing for complex data structures
+set print pretty on
+
+# Disable pagination
+set pagination off
+
+# Display assembly instruction with next source line
+set disassemble-next-line on
+
+# Keep history
+set history save on
+
+# Show all arguments in backtrace
+set print frame-arguments all
+
+# Reduce verbosity of some repetitive warnings
+set print symbol-loading brief
+set print object on
