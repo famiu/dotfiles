@@ -1,0 +1,18 @@
+# Enable pretty printing for complex data structures
+set print pretty on
+
+# Disable pagination
+set pagination off
+
+# Keep history
+set history save on
+set history filename ~/.gdb_history
+
+# Reduce verbosity of some repetitive warnings
+set print symbol-loading brief
+
+# Print actual type of dynamic object by following the vtable
+set print object on
+
+# Enable debuginfod
+set debuginfod enabled on
