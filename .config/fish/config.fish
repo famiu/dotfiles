@@ -42,4 +42,8 @@ if status is-interactive
         echo "Installation complete"
         cleanup $tmpdir $pwd
     end
+
+    function mkcd
+        mkdir -p $argv[1]; and cd $argv[1]
+    end
 end
