@@ -3,8 +3,8 @@ if type -q direnv
 end
 
 if status is-interactive
-    function dotfiles --wraps '/usr/bin/env git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-        /usr/bin/env git --work-tree=$HOME/Dev/dotfiles/ $argv
+    function dotfiles --wraps '/usr/bin/env git --git-dir=$HOME/Dev/dotfiles/.git --work-tree=$HOME/Dev/dotfiles/'
+        /usr/bin/env git --git-dir=$HOME/Dev/dotfiles/.git --work-tree=$HOME/Dev/dotfiles/ $argv
     end
 
     function mkcd
