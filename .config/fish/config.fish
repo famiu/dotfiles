@@ -1,3 +1,6 @@
+# Remove the greeting message
+set fish_greeting
+
 if type -q direnv
     direnv hook fish | source
 end
