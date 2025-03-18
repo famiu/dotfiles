@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="lock">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-lock-screen</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Lock</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="logout">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-log-out</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Logout</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="suspend">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-suspend</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Suspend</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="hibernate">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-hibernate</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Hibernate</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter1"/>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="poweroff">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-shutdown</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Power-off</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="reboot">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-reboot</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Reboot</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
