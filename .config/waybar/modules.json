@@ -79,7 +79,6 @@
     "format-linked": "󰈀 {ifname} (No IP)",
     "format-disconnected": " ",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "/usr/local/bin/ags -t ControlPanel",
     "interval": 2
   },
   "cpu": {
@@ -112,7 +111,7 @@
   "clock": {
     "format": "{:%H:%M - %a, %d %b %Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "on-click": "gnome-calendar"
   },
   "tray": {
     "icon-size": 20,
