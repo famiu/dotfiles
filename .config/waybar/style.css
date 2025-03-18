@@ -39,7 +39,8 @@ window#waybar {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#mpd {
+#mpd,
+#custom-notification {
   padding: 0 10px;
   border-radius: 15px;
 }
@@ -60,7 +61,8 @@ window#waybar {
 #idle_inhibitor:hover,
 #scratchpad:hover,
 #power-profiles-daemon:hover,
-#mpd:hover {
+#mpd:hover,
+#custom-notification:hover {
   background: rgba(26, 27, 38, 0.9);
 }
 
