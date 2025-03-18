@@ -22,6 +22,6 @@
     "custom/power",
   ],
 
-  //Modules configuration
-  "include": ["~/.config/waybar/modules.json"],
+  // Modules configuration
+  "include": ["~/.config/waybar/modules.jsonc"],
 }
