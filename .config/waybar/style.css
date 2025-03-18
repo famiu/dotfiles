@@ -97,6 +97,10 @@ window#waybar {
   background: rgba(50, 50, 75, 0.9);
 }
 
+#workspaces button.urgent {
+  background: rgba(235, 77, 75, 0.9);
+}
+
 #workspaces button:hover {
   background: #11111b;
   color: #cdd6f4;
