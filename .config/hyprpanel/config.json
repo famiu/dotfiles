@@ -3,11 +3,15 @@
   "menus.transition": "crossfade",
   "scalingPriority": "hyprland",
   "bar.autoHide": "never",
-  "bar.workspaces.showWsIcons": false,
-  "bar.workspaces.showApplicationIcons": false,
-  "bar.workspaces.numbered_active_indicator": "underline",
   "bar.workspaces.show_numbered": false,
   "bar.workspaces.show_icons": false,
+  "bar.workspaces.showWsIcons": true,
+  "bar.workspaces.showApplicationIcons": true,
+  "bar.workspaces.numbered_active_indicator": "underline",
+  "bar.workspaces.applicationIconOncePerWorkspace": true,
+  "bar.workspaces.applicationIconMap": {
+    "[Ll]ibre[Ww]olf": ""
+  },
   "bar.layouts": {
     "*": {
       "left": [
