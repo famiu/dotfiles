@@ -15,9 +15,11 @@ HISTFILE=~/.cache/zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
 setopt share_history
+# Ignore commands that start with a space
+setopt hist_ignore_space
 
 # Use extended globbing
-setopt extendedglob
+setopt extended_glob
 
 # Enable completion
 autoload -Uz compinit && compinit
