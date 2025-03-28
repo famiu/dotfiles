@@ -88,7 +88,7 @@ plugin-load $plugins
 ## ============= Key bindings =============
 ## ========================================
 
-# Create a zkbd compatible hash
+# Create a zkbd compatible hash.
 typeset -g -A key
 
 key[Home]="${terminfo[khome]}"
@@ -106,7 +106,7 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 key[Control-Left]="${terminfo[kLFT5]}"
 key[Control-Right]="${terminfo[kRIT5]}"
 
-# Setup key accordingly
+# Setup key bindings accordingly.
 [[ -n "${key[Home]}"          ]] && bindkey -- "${key[Home]}"          beginning-of-line
 [[ -n "${key[End]}"           ]] && bindkey -- "${key[End]}"           end-of-line
 [[ -n "${key[Insert]}"        ]] && bindkey -- "${key[Insert]}"        overwrite-mode
