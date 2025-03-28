@@ -37,48 +37,17 @@ setopt correct
 ## =============== Plugins ================
 ## ========================================
 
-# Custom plugin loader. Takes a list of plugins to load as arguments.
-# Modified version of https://github.com/mattmc3/zsh_unplugged
-function plugin-load {
-    local repo plugdir initfile initfiles=()
-    : ${ZPLUGINDIR:=$HOME/.local/share/zsh/plugins}
+ZPLUGINDIR=${ZPLUGINDIR:-$XDG_DATA_HOME/zsh/plugins}
 
-    for repo in $@; do
-        plugdir=$ZPLUGINDIR/${repo:t}
-        initfile=$plugdir/${repo:t}.plugin.zsh
+# Clone antidote if necessary.
+if [[ ! -d ${ZDOTDIR:-$HOME}/.antidote ]]; then
+  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-$HOME}/.antidote
+fi
 
-        if [[ ! -d $plugdir ]]; then
-            echo "Cloning $repo..."
-            git clone -q --depth 1 --recursive --shallow-submodules \
-                https://github.com/$repo $plugdir
-        fi
-
-        if [[ ! -e $initfile ]]; then
-            initfiles=($plugdir/*.{plugin.zsh,zsh-theme,zsh,sh}(N))
-            (( $#initfiles )) || { echo >&2 "No init file '$repo'." && continue }
-            ln -sf $initfiles[1] $initfile
-        fi
-
-        fpath+=$plugdir
-        . $initfile
-    done
-}
-
-plugins=(
-    # Plugins that need to be loaded first
-    romkatv/powerlevel10k
-
-    # Normal plugins
-    zsh-users/zsh-completions
-    rupa/z
-
-    # Plugins that need to be loaded last
-    zsh-users/zsh-syntax-highlighting
-    zsh-users/zsh-history-substring-search
-    zsh-users/zsh-autosuggestions
-)
-
-plugin-load $plugins
+# Load antidote
+ANTIDOTE_HOME=$XDG_DATA_HOME/zsh/antidote
+source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
+antidote load
 
 # Load Powerlevel10k configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

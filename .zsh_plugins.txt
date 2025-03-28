@@ -1,0 +1,11 @@
+# Plugins that need to be loaded first
+romkatv/powerlevel10k
+
+# Normal plugins
+zsh-users/zsh-completions
+rupa/z
+
+# Plugins that need to be loaded last
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions
