@@ -137,7 +137,6 @@ fi
 
 alias lg='lazygit'
 alias nv='nvim'
-alias dotfiles='git --git-dir=$HOME/Dev/dotfiles/.git --work-tree=$HOME/Dev/dotfiles/'
 
 function mkcd {
     mkdir -p $1 && cd $1
