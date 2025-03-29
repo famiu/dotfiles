@@ -49,7 +49,7 @@ ANTIDOTE_HOME=$XDG_DATA_HOME/zsh/antidote
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
-# Load Powerlevel10k configuration
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
