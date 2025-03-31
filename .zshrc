@@ -29,15 +29,12 @@ setopt correct
 ## =============== Plugins ================
 ## ========================================
 
-ZPLUGINDIR=${ZPLUGINDIR:-$XDG_DATA_HOME/zsh/plugins}
-
 # Clone antidote if necessary.
 if [[ ! -d ${ZDOTDIR:-$HOME}/.antidote ]]; then
   git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-$HOME}/.antidote
 fi
 
 # Load antidote
-ANTIDOTE_HOME=$XDG_DATA_HOME/zsh/antidote
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
