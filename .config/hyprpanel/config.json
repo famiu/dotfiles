@@ -27,6 +27,7 @@
         "volume",
         "network",
         "bluetooth",
+        "hypridle",
         "battery",
         "systray",
         "notifications"
@@ -45,6 +46,7 @@
   "bar.customModules.netstat.icon": "󰖟",
   "bar.customModules.netstat.labelType": "full",
   "bar.customModules.netstat.round": true,
+  "bar.customModules.hypridle.label": false,
   "notifications.monitor": 0,
   "menus.clock.time.military": true,
   "menus.clock.time.hideSeconds": true,
