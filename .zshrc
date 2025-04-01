@@ -7,7 +7,7 @@ HISTFILE=~/.cache/zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
 setopt share_history
-# Ignore commands that start with a space
+# Don't put commands that start with a space in history
 setopt hist_ignore_space
 
 # Use extended globbing
@@ -23,6 +23,12 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Enable command correction
 setopt correct
+
+# Use bash-like word definition
+# This makes things like backward-word and forward-word behave like in bash
+# and treat path separators as word boundaries.
+autoload -Uz select-word-style
+select-word-style bash
 
 
 ## ========================================
