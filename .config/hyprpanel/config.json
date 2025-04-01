@@ -54,7 +54,6 @@
   "menus.clock.weather.unit": "metric",
   "menus.clock.weather.enabled": false,
   "menus.dashboard.powermenu.avatar.image": "~/.face",
-  "menus.dashboard.stats.enable_gpu": true,
   "menus.dashboard.shortcuts.enabled": false,
   "menus.dashboard.directories.enabled": false,
   "menus.power.lowBatteryNotification": true,
