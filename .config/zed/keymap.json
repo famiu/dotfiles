@@ -1,0 +1,65 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+    {
+        "context": "Dock",
+        "bindings": {
+            // Use Vim window keybindings to navigate docks.
+            "ctrl-w h": "workspace::ActivatePaneLeft",
+            "ctrl-w l": "workspace::ActivatePaneRight",
+            "ctrl-w k": "workspace::ActivatePaneUp",
+            "ctrl-w j": "workspace::ActivatePaneDown"
+        }
+    },
+    {
+        "context": "vim_mode == normal && !menu",
+        "bindings": {
+            // Use H and L to go to beginning and end of line.
+            "shift-h": ["workspace::SendKeystrokes", "^"],
+            "shift-l": ["workspace::SendKeystrokes", "$"],
+            // Use neovim's yank behavior: yank to end of line.
+            "shift-y": ["workspace::SendKeystrokes", "y $"]
+        }
+    },
+    {
+        "context": "vim_mode == visual",
+        "bindings": {
+            // Use S for surround in Visual mode.
+            "shift-s": ["vim::PushAddSurrounds", {}],
+            // Use X for exchange.
+            "shift-x": "vim::Exchange"
+        }
+    },
+    {
+        "context": "VimControl && !menu",
+        "bindings": {
+            "enter": "vim::PushSneak",
+            "shift-enter": "vim::PushSneakBackward"
+        }
+    },
+    {
+        "context": "VimControl && !menu && vim_mode != operator",
+        "bindings": {
+            // Use subword motion
+            "w": "vim::NextSubwordStart",
+            "b": "vim::PreviousSubwordStart",
+            "e": "vim::NextSubwordEnd",
+            "g e": "vim::PreviousSubwordEnd"
+        }
+    },
+    {
+        "context": "Workspace",
+        "bindings": {
+            "shift shift": "file_finder::Toggle"
+        }
+    },
+    {
+        "context": "Editor",
+        "bindings": {}
+    }
+]

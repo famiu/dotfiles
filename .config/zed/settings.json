@@ -1,0 +1,62 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+    "auto_install_extensions": {
+        "nvim-nightfox": true,
+        "html": true,
+
+        // Custom language servers
+        "basedpyright": true
+    },
+    "features": {
+        "edit_prediction_provider": "zed"
+    },
+    "theme": {
+        "mode": "dark",
+        "light": "Dawnfox",
+        "dark": "Carbonfox"
+    },
+    "assistant": {
+        "default_model": {
+            "provider": "zed.dev",
+            "model": "claude-3-5-sonnet-latest"
+        },
+        "version": "2"
+    },
+    "terminal": {
+        "line_height": "standard"
+    },
+    "base_keymap": "Atom",
+
+    // Editor settings
+    "vim_mode": true,
+    "tab_size": 4,
+    "hard_tabs": false,
+    "soft_wrap": "preferred_line_length",
+    "preferred_line_length": 80,
+    "show_signature_help_after_edits": true,
+    "relative_line_numbers": true,
+
+    // UI settings
+    "buffer_font_family": "Fira Code",
+    "buffer_font_size": 16,
+    "ui_font_family": "Inter Display",
+    "ui_font_size": 16,
+    "pane_split_direction_horizontal": "down",
+    "pane_split_direction_vertical": "right",
+    "use_system_prompts": false,
+    "use_system_path_prompts": false,
+
+    // Language-specific settings
+    "languages": {
+        "Python": {
+            "language_servers": ["basedpyright", "!pyright", "ruff"]
+        }
+    }
+}
