@@ -103,6 +103,20 @@ fi
 ## =============== Aliases ================
 ## ========================================
 
+if command -v bat &> /dev/null; then
+    alias cat='bat --style=plain'
+fi
+
+if command -v exa &> /dev/null; then
+    alias ls='exa --icons'
+    alias ll='exa -l --icons'
+    alias la='exa -la --icons'
+else
+    alias ls='ls --color=auto'
+    alias ll='ls -l --color=auto'
+    alias la='ls -la --color=auto'
+fi
+
 alias lg='lazygit'
 alias nv='nvim'
 
