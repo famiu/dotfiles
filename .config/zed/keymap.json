@@ -19,11 +19,15 @@
     {
         "context": "vim_mode == normal && !menu",
         "bindings": {
+            // CTRL-L to clear search.
+            "ctrl-l": "buffer_search::Dismiss",
             // Use H and L to go to beginning and end of line.
             "shift-h": ["workspace::SendKeystrokes", "^"],
             "shift-l": ["workspace::SendKeystrokes", "$"],
             // Use neovim's yank behavior: yank to end of line.
-            "shift-y": ["workspace::SendKeystrokes", "y $"]
+            "shift-y": ["workspace::SendKeystrokes", "y $"],
+            // Search entire workspace with <Space> /.
+            "space /": "workspace::NewSearch"
         }
     },
     {
@@ -45,7 +49,7 @@
     {
         "context": "VimControl && !menu && vim_mode != operator",
         "bindings": {
-            // Use subword motion
+            // Use subword motion.
             "w": "vim::NextSubwordStart",
             "b": "vim::PreviousSubwordStart",
             "e": "vim::NextSubwordEnd",
