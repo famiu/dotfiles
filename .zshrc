@@ -44,8 +44,19 @@ fi
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
+# Load Powerlevel10k prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load direnv
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
+# Load fzf
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
 
 
 ## ========================================
@@ -130,18 +141,3 @@ function fork {
     nohup $@ &>/dev/null &
     disown
 }
-
-
-## ========================================
-## ================= Misc =================
-## ========================================
-
-# Enable direnv
-if command -v direnv &> /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
-# Enable fzf
-if command -v fzf &> /dev/null; then
-    source <(fzf --zsh)
-fi
