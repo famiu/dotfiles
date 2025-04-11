@@ -120,8 +120,15 @@ fi
 alias lg='lazygit'
 alias nv='nvim'
 
+# Create a directory and cd into it
 function mkcd {
     mkdir -p $1 && cd $1
+}
+
+# Launch application without output and without blocking the shell
+function fork {
+    nohup $@ &>/dev/null &
+    disown
 }
 
 
