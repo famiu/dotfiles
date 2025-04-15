@@ -2,6 +2,9 @@
 ## =============== Settings ===============
 ## ========================================
 
+# Add ~/.local/bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 # Save history
 HISTFILE=~/.cache/zsh_history
 HISTSIZE=10000
