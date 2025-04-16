@@ -42,5 +42,4 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 theme = Builtin Pastel Dark
-font-family = FiraCode Nerd Font
 font-size = 14
