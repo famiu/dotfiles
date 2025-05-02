@@ -7,15 +7,26 @@
     "format-icons": {
       "urgent": "",
       "active": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": ""
-    }
+      "deactivated": "",
+    },
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": "",
+    },
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
@@ -31,9 +42,9 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""]
+      "default": ["", "", ""],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
   "network": {
     "tooltip": true,
@@ -45,17 +56,17 @@
     "format-linked": "󰈀 {ifname} (No IP)",
     "format-disconnected": " ",
     "tooltip-format-disconnected": "Disconnected",
-    "interval": 2
+    "interval": 2,
   },
   "cpu": {
     "format": "  {usage}%",
     "tooltip": true,
-    "on-click": "missioncenter"
+    "on-click": "missioncenter",
   },
   "memory": {
     "format": "  {}%",
     "tooltip": true,
-    "on-click": "missioncenter"
+    "on-click": "missioncenter",
   },
   "temperature": {
     "interval": 10,
@@ -63,28 +74,28 @@
     "critical-threshold": 100,
     "format-critical": " {temperatureC}",
     "format": " {temperatureC}°C",
-    "on-click": "missioncenter"
+    "on-click": "missioncenter",
   },
   "battery": {
     "states": {
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "format": "{icon}  {capacity}%",
     "format-full": "{icon}  {capacity}%",
     "format-charging": "  {capacity}%",
     "format-plugged": "  {capacity}%",
     "format-alt": "{time}  {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["", "", "", "", ""],
   },
   "clock": {
     "format": "{:%H:%M - %a, %d %b %Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "gnome-calendar"
+    "on-click": "gnome-calendar",
   },
   "tray": {
     "icon-size": 20,
-    "spacing": 10
+    "spacing": 10,
   },
   "custom/power": {
     "format": "⏻ ",
@@ -97,8 +108,8 @@
       "suspend": "systemctl suspend",
       "hibernate": "systemctl hibernate",
       "poweroff": "systemctl poweroff",
-      "reboot": "systemctl reboot"
-    }
+      "reboot": "systemctl reboot",
+    },
   },
   "custom/notification": {
     "tooltip": false,
@@ -111,13 +122,13 @@
       "inhibited-notification": "<span foreground='red'><sup></sup></span>",
       "inhibited-none": "",
       "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
+      "dnd-inhibited-none": "",
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
+    "escape": true,
+  },
 }

@@ -15,6 +15,7 @@
 
   "modules-right": [
     "idle_inhibitor",
+    "power-profiles-daemon",
     "custom/notification",
     "pulseaudio",
     "battery",
