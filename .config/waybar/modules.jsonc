@@ -99,15 +99,8 @@
   },
   "custom/power": {
     "format": "⏻",
-    "tooltip": false,
-    "menu": "on-click",
-    "menu-file": "~/.config/waybar/power_menu.xml",
-    "menu-actions": {
-      "shutdown": "systemctl poweroff",
-      "reboot": "systemctl reboot",
-      "suspend": "systemctl suspend",
-      "logout": "hyprctl dispatch exit",
-    },
+    "tooltip": "Power Menu",
+    "on-click": "wlogout -c 5 -r 5 -p layer-shell",
   },
   "custom/notification": {
     "tooltip": false,
