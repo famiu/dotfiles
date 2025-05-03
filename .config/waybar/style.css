@@ -1,6 +1,5 @@
 * {
-  font-family:
-    "Inter Semibold", "Font Awesome 6 Free", Roboto, sans-serif;
+  font-family: "Inter Semibold", "Font Awesome 6 Free", Roboto, sans-serif;
   font-size: 15px;
   transition: background-color 0.3s ease-out;
 }
@@ -9,9 +8,6 @@ window#waybar {
   padding: 3px 5px;
   background: rgba(0, 0, 0, 0.8);
   color: #c0caf5;
-  font-family:
-    SpaceMono Nerd Font,
-    feather;
   transition: background-color 0.5s;
 }
 
@@ -81,32 +77,36 @@ window#waybar {
   background: rgba(20, 21, 31, 0.9);
   margin: 3px 5px;
   border-radius: 15px;
+  padding: 4px 4px;
 }
 
 #workspaces button {
   background: transparent;
-  font-family:
-    SpaceMono Nerd Font,
-    feather;
   font-weight: 900;
   font-size: 13pt;
   color: #c0caf5;
   border: none;
-  border-radius: 15px;
-}
-
-#workspaces button.active {
-  background: rgba(50, 50, 75, 0.9);
-}
-
-#workspaces button.urgent {
-  background: rgba(235, 77, 75, 0.9);
+  border-radius: 12px;
+  padding: 0px 8px;
+  margin: 0 2px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 #workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
-  box-shadow: none;
+  background-color: rgba(50, 50, 75, 0.6);
+  color: #ffffff;
+}
+
+#workspaces button.active {
+  background-color: rgba(50, 50, 75, 0.9);
+  color: #ffffff;
+}
+
+#workspaces button.urgent {
+  background-color: rgba(235, 77, 75, 0.9);
+  color: #ffffff;
 }
 
 #custom-power {
