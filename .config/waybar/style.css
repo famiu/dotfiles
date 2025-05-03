@@ -40,6 +40,7 @@ window#waybar {
 #scratchpad,
 #power-profiles-daemon,
 #mpd,
+#custom-power,
 #custom-notification {
   padding: 0 10px;
   border-radius: 15px;
@@ -62,6 +63,7 @@ window#waybar {
 #scratchpad:hover,
 #power-profiles-daemon:hover,
 #mpd:hover,
+#custom-power:hover,
 #custom-notification:hover {
   background: rgba(26, 27, 38, 0.9);
 }
