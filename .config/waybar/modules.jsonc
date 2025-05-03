@@ -101,14 +101,12 @@
     "format": "⏻",
     "tooltip": false,
     "menu": "on-click",
-    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+    "menu-file": "~/.config/waybar/power_menu.xml",
     "menu-actions": {
-      "lock": "pidof hyprlock || hyprlock",
-      "logout": "hyprctl dispatch exit",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-      "poweroff": "systemctl poweroff",
+      "shutdown": "systemctl poweroff",
       "reboot": "systemctl reboot",
+      "suspend": "systemctl suspend",
+      "logout": "hyprctl dispatch exit",
     },
   },
   "custom/notification": {
