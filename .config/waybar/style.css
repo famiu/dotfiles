@@ -1,6 +1,6 @@
 * {
   font-family:
-    "Inter Semibold", FontAwesome, Roboto, sans-serif;
+    "Inter Semibold", "Font Awesome 6 Free", Roboto, sans-serif;
   font-size: 15px;
   transition: background-color 0.3s ease-out;
 }
@@ -110,7 +110,6 @@ window#waybar {
 }
 
 #custom-power {
-  padding: 0 10px;
   font-size: 20px;
   transition: color 0.5s;
 }
