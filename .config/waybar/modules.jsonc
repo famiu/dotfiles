@@ -100,7 +100,7 @@
   "custom/power": {
     "format": "⏻",
     "tooltip": "Power Menu",
-    "on-click": "wlogout -c 5 -r 5 -p layer-shell",
+    "on-click": "wlogout -c 5 -r 5 -b 4 -p layer-shell",
   },
   "custom/notification": {
     "tooltip": false,
