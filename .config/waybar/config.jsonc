@@ -4,7 +4,7 @@
   "spacing": 4,
 
   "modules-left": [
-    "hyprland/workspaces",
+    "niri/workspaces",
     "cpu",
     "memory",
     "temperature",

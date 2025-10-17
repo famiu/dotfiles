@@ -45,3 +45,4 @@ theme = Builtin Pastel Dark
 font-size = 14
 background-opacity = 0.85
 background-blur = false
+gtk-titlebar-style = tabs
