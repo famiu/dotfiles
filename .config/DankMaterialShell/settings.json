@@ -94,7 +94,11 @@
   "mediaSize": 1,
   "dankBarLeftWidgets": [
     "launcherButton",
-    "workspaceSwitcher"
+    "workspaceSwitcher",
+    {
+      "id": "network_speed_monitor",
+      "enabled": true
+    }
   ],
   "dankBarCenterWidgets": [
     "music",
