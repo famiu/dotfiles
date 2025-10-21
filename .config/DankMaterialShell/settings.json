@@ -94,8 +94,7 @@
   "mediaSize": 1,
   "dankBarLeftWidgets": [
     "launcherButton",
-    "workspaceSwitcher",
-    "focusedWindow"
+    "workspaceSwitcher"
   ],
   "dankBarCenterWidgets": [
     "music",
@@ -176,7 +175,7 @@
   "cornerRadius": 12,
   "notificationOverlayEnabled": false,
   "dankBarAutoHide": false,
-  "dankBarOpenOnOverview": false,
+  "dankBarOpenOnOverview": true,
   "dankBarVisible": true,
   "dankBarSpacing": 0,
   "dankBarBottomGap": 0,
