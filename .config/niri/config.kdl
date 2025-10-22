@@ -657,6 +657,9 @@ binds {
     XF86AudioMicMute allow-when-locked=true {
         spawn "dms" "ipc" "call" "audio" "micmute";
     }
+    XF86AudioPlay allow-when-locked=true {
+        spawn "dms" "ipc" "call" "mpris" "playPause";
+    }
     XF86AudioPause allow-when-locked=true {
         spawn "dms" "ipc" "call" "mpris" "playPause";
     }
