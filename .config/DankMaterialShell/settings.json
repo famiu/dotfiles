@@ -138,7 +138,7 @@
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
-  "networkPreference": "auto",
+  "networkPreference": "wifi",
   "iconTheme": "Tela-circle-black",
   "launcherLogoMode": "os",
   "launcherLogoCustomPath": "",
