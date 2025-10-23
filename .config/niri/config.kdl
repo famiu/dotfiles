@@ -91,7 +91,7 @@ output "DP-2" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "3840x2160@144"
+    mode "3840x2160"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1.25
@@ -113,7 +113,7 @@ output "DP-2" {
 }
 
 output "eDP-1" {
-    mode "2560x1440@240"
+    mode "2560x1440"
     scale 1.6
     position x=3072 y=700
 }
