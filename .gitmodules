@@ -1,3 +1,3 @@
-[submodule ".config/nvim"]
-	path = .config/nvim
-	url = https://github.com/famiu/dot-nvim
+[submodule "dot-config/nvim"]
+	path = dot-config/nvim
+	url = git@github.com:famiu/dot-nvim.git
