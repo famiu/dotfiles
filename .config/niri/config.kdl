@@ -592,13 +592,19 @@ binds {
     // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
 
+    // Main screenshot bindings
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
+    // Alternative screenshot bindings
     Mod+S { screenshot; }
     Mod+Ctrl+S { screenshot-screen; }
     Mod+Alt+S { screenshot-window; }
+
+    // Annotate last screenshot taken
+    Mod+Ctrl+Shift+S { spawn "~/.local/bin/annotate_screenshot.sh"; }
+    Ctrl+Shift+Print { spawn "~/.local/bin/annotate_screenshot.sh"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
