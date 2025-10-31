@@ -360,6 +360,7 @@ spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 // Polkit for elevation prompts
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 // Start DankMaterialShell
+// TODO: Create own Quickshell configuration and ditch DMS
 spawn-at-startup "dms" "run"
 // Disable builtin config notification since DankMaterialShell already does this
 config-notification {
@@ -625,7 +626,7 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     Mod+Space hotkey-overlay-title="Application Launcher" {
-        spawn "dms" "ipc" "call" "spotlight" "toggle";
+        spawn "vicinae" "toggle";
     }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
         spawn "dms" "ipc" "call" "clipboard" "toggle";
