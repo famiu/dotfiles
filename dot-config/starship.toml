@@ -3,6 +3,7 @@
 format = """
 $username\
 $hostname\
+$shell\
 $directory\
 $git_branch\
 $git_state\
@@ -15,3 +16,16 @@ right_format = "$all"
 
 [package]
 disabled = true
+
+[directory]
+style = "bold blue"
+
+[shell]
+disabled = false
+style = "bold red"
+bash_indicator = " bash"
+zsh_indicator = " zsh"
+fish_indicator = "🐟 fish"
+powershell_indicator = " pwsh"
+nu_indicator = "󰎖 nu"
+cmd_indicator = "📟 cmd"
