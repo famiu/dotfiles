@@ -41,6 +41,7 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+command = /usr/bin/nu
 theme = Builtin Pastel Dark
 font-size = 14
 background-opacity = 0.85
