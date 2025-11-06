@@ -22,19 +22,6 @@ $env.path ++= ["~/.local/bin"]
 $env.config.show_banner = false
 $env.config.buffer_editor = "nvim"
 
-$env.config.completions = {
-    case_sensitive: false
-    quick: true
-    partial: true
-    algorithm: "fuzzy"
-    external: {
-        enable: true
-        completer: {|spans|
-            carapace $spans.0 nushell ...$spans | from json
-        }
-    }
-}
-
 $env.config.history = {
     file_format: sqlite
     max_size: 1_000_000
@@ -65,6 +52,10 @@ def --env mkcd [folder: path] {
 # Prepare vendor autoload directory to use for sourcing plugins
 let vendor_autoload_dir = ($nu.data-dir | path join "vendor/autoload")
 mkdir $vendor_autoload_dir
+
+# carapace
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+carapace _carapace nushell | save -f ($vendor_autoload_dir | path join carapace.nu)
 
 # starship.rs
 starship init nu | save -f ($vendor_autoload_dir | path join starship.nu)
