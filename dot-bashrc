@@ -11,6 +11,25 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=10000
 
+# Disable annoying bell
+bind 'set bell-style none'
+
+# Make completion behave a bit nicer
+bind 'set show-all-if-ambiguous on'
+bind 'set page-completions off'
+bind "set menu-complete-display-prefix on"
+bind 'TAB:menu-complete'
+bind '"\e[Z": menu-complete-backward'
+
+# Cycle through history based on characters already typed on the line
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+
+# Keep Ctrl-Left and Ctrl-Right working when the above are used
+bind '"\e[1;5C":forward-word'
+bind '"\e[1;5D":backward-word'
+
+# Aliases
 alias cat='bat --style=plain'
 alias ls='ls'
 alias ll='ls -l'
@@ -23,6 +42,10 @@ alias xt='eza --icons auto --tree'
 alias xta='eza --icons auto --tree --all'
 alias lg='lazygit'
 alias nv='nvim'
+
+# Carapace completion
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+source <(carapace _carapace)
 
 # Load Starship prompt
 eval "$(starship init bash)"
