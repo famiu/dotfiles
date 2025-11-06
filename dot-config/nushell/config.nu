@@ -34,12 +34,12 @@ alias cat = bat --style=plain
 alias ls = ls
 alias ll = ls -l
 alias la = ls -la
-alias x = eza --icons
-alias xa = eza --icons --all
-alias xl	= eza --long
+alias x = eza --icons auto
+alias xa = eza --icons auto --all
+alias xl = eza --long
 alias xla = eza --long --all
-alias xt	= eza --icons --tree
-alias xta = eza --icons --tree --all
+alias xt = eza --icons auto --tree
+alias xta = eza --icons auto --tree --all
 alias lg = lazygit
 alias nv = nvim
 
