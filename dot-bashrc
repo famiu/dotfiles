@@ -30,16 +30,23 @@ bind '"\e[1;5C":forward-word'
 bind '"\e[1;5D":backward-word'
 
 # Aliases
-alias cat='bat --style=plain'
-alias ls='ls'
-alias ll='ls -l'
-alias la='ls -la'
-alias x='eza --icons auto'
-alias xa='eza --icons auto --all'
-alias xl='eza --long'
-alias xla='eza --long --all'
-alias xt='eza --icons auto --tree'
-alias xta='eza --icons auto --tree --all'
+if command -v bat 2>&1 > /dev/null; then
+    alias cat='bat --style=plain'
+fi
+
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias la='ls -la --color=auto'
+
+if command -v eza 2>&1 > /dev/null; then
+    alias x='eza --icons=auto'
+    alias xa='eza -a --icons=auto'
+    alias xl='eza -l --icons=auto'
+    alias xla='eza -la --icons=auto'
+    alias xt='eza -T --icons=auto'
+    alias xta='eza -Ta --icons=auto'
+fi
+
 alias lg='lazygit'
 alias nv='nvim'
 
