@@ -50,6 +50,11 @@ fi
 alias lg='lazygit'
 alias nv='nvim'
 
+# Function to create directory and CD to it
+function mkcd {
+    mkdir -p "$1" && cd "$1"
+}
+
 # Carapace completion
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 source <(carapace _carapace)
@@ -57,7 +62,12 @@ source <(carapace _carapace)
 # Load Starship prompt
 eval "$(starship init bash)"
 
-# Function to create directory and CD to it
-function mkcd {
-    mkdir -p "$1" && cd "$1"
-}
+# Load Zoxide
+if command -v zoxide 2>&1 > /dev/null; then
+    eval "$(zoxide init bash)"
+fi
+
+# Load direnv
+if command -v direnv 2>&1 > /dev/null; then
+    eval "$(direnv hook bash)"
+fi
