@@ -355,8 +355,6 @@ window-rule {
     clip-to-geometry true
 }
 
-// Required for DankMaterialShell clipboard history integration
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 // Polkit for elevation prompts
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 // Disable builtin config notification since DankMaterialShell already does this
@@ -627,9 +625,6 @@ binds {
 
     Mod+Space hotkey-overlay-title="Application Launcher" {
         spawn "vicinae" "toggle";
-    }
-    Mod+V hotkey-overlay-title="Clipboard Manager" {
-        spawn "dms" "ipc" "call" "clipboard" "toggle";
     }
     Mod+M hotkey-overlay-title="Task Manager" {
         spawn "dms" "ipc" "call" "processlist" "toggle";
