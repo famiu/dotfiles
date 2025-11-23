@@ -701,3 +701,7 @@ gestures {
 cursor {
     xcursor-size 24
 }
+
+clipboard {
+    disable-primary
+}
