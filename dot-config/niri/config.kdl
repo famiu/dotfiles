@@ -277,6 +277,13 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+// Open certain windows maximized
+window-rule {
+    match app-id=r#"^firefox$"#
+    match app-id=r#"^vesktop$"#
+    open-maximized true
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
