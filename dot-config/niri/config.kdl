@@ -26,7 +26,7 @@ input {
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
-            options "caps:swapescape,compose:ralt"
+            options "compose:ralt"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -67,6 +67,10 @@ input {
         // scroll-button 273
         // scroll-button-lock
         // middle-emulation
+    }
+
+    tablet {
+        map-to-output "DP-2"
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
