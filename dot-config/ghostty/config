@@ -43,7 +43,7 @@
 # resize-overlay-duration = 4s 200ms
 command = /usr/bin/nu
 theme = Builtin Pastel Dark
-font-size = 14
+font-size = 16
 background-opacity = 0.85
 background-blur = false
 gtk-titlebar = false
