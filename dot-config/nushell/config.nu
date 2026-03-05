@@ -78,3 +78,4 @@ $env.config.hooks.pre_prompt = $env.config.hooks.pre_prompt | append { ||
 
 # zoxide
 zoxide init nushell | save -f ($vendor_autoload_dir | path join zoxide.nu)
+source $"($nu.home-path)/.cargo/env.nu"
