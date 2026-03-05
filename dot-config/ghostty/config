@@ -45,5 +45,5 @@
 # command = /usr/bin/nu
 theme = Builtin Pastel Dark
 font-size = 16
-background-opacity = 0.85
+background-opacity = 0.90
 background-blur = true
