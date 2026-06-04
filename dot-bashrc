@@ -95,4 +95,5 @@ fi
 if command -v direnv 2>&1 > /dev/null; then
     eval "$(direnv hook bash)"
 fi
+
 . "$HOME/.cargo/env"
