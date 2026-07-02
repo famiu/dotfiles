@@ -1,0 +1,41 @@
+#!/bin/bash
+set -eo pipefail
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <path_or_url>" >&2
+    exit 1
+fi
+
+EDITOR="${EDITOR:-vi}"
+TARGET="$1"
+TEMP_FILE=$(mktemp /tmp/inspect_script.XXXXXX.sh)
+
+# Ensure cleanup of temp file
+trap 'rm -f "$TEMP_FILE"' EXIT
+
+if [ -f "$TARGET" ]; then
+    cp "$TARGET" "$TEMP_FILE"
+elif [[ "$TARGET" =~ ^https?:// ]]; then
+    echo "Fetching script..."
+    curl -LsSf "$TARGET" > "$TEMP_FILE"
+else
+    echo "Error: '$TARGET' is neither a local file nor an HTTP(S) URL." >&2
+    exit 1
+fi
+
+echo "Opening in editor for inspection..."
+"$EDITOR" "$TEMP_FILE" || true
+
+echo
+read -p "Execute this script? (y/N): " choice
+
+case "$choice" in
+    [Yy]*)
+        echo "Executing..."
+        echo "----------------------------------------"
+        bash "$TEMP_FILE"
+        ;;
+    *)
+        echo "Cancelled."
+        ;;
+esac
