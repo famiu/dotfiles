@@ -1,12 +1,6 @@
 [submodule "dot-config/nvim"]
 	path = dot-config/nvim
 	url = git@github.com:famiu/dot-nvim.git
-[submodule "dot-config/tmux/plugins/tmux-resurrect"]
-	path = dot-config/tmux/plugins/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
-[submodule "dot-config/tmux/plugins/tmux-continuum"]
-	path = dot-config/tmux/plugins/tmux-continuum
-	url = https://github.com/tmux-plugins/tmux-continuum
 [submodule "dot-config/zsh/plugins/zsh-autosuggestions"]
 	path = dot-config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
