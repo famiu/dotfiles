@@ -9,7 +9,7 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]]; then
 fi
 export PATH
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# Uncomment the following line to disable systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
@@ -22,13 +22,28 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# If not running interactively, don't do anything else
+# Load ble.sh in interactive shells, use --noattach to defer attaching until later to set up other settings first.
+if [[ $- == *i* ]]; then
+    blesh_src="$HOME/.config/bash/plugins/blesh"
+    blesh_out=$blesh_src/out/ble.sh
+
+    # Only rebuild if the output is missing or older than the source dir.
+    if [[ -d $blesh_src ]] && { [[ ! -f $blesh_out ]] || [[ $blesh_src -nt $blesh_out ]]; }; then
+        if make_cmd=$(command -v gmake || command -v make); then
+            ( cd "$blesh_src" && "$make_cmd" ) >/dev/null 2>&1
+        fi
+    fi
+
+    [[ -f $blesh_out ]] && source "$blesh_out" --noattach
+fi
+
+# If not running interactively, don't do anything else.
 [[ $- != *i* ]] && return
 
 # Make history ignore lines starting with space.
 HISTCONTROL=ignorespace
 
-# Append to the history file, don't overwrite it
+# Append to the history file, don't overwrite it.
 shopt -s histappend
 
 # History size options
@@ -38,23 +53,21 @@ HISTFILESIZE=10000
 # Disable annoying bell
 bind 'set bell-style none'
 
-# Make completion behave a bit nicer
-bind 'set show-all-if-ambiguous on'
-bind 'set page-completions off'
-bind "set menu-complete-display-prefix on"
-bind 'TAB:menu-complete'
-bind '"\e[Z": menu-complete-backward'
-
-# Cycle through history based on characters already typed on the line
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
-
-# Keep Ctrl-Left and Ctrl-Right working when the above are used
-bind '"\e[1;5C":forward-word'
-bind '"\e[1;5D":backward-word'
+# Fallback readline bindings used when ble.sh is not loaded.
+if ! ((_ble_bash)); then
+    bind 'set show-all-if-ambiguous on'
+    bind 'set page-completions off'
+    bind "set menu-complete-display-prefix on"
+    bind 'TAB:menu-complete'
+    bind '"\e[Z": menu-complete-backward'
+    bind '"\e[A":history-search-backward'
+    bind '"\e[B":history-search-forward'
+    bind '"\e[1;5C":forward-word'
+    bind '"\e[1;5D":backward-word'
+fi
 
 # Aliases
-if command -v bat 2>&1 > /dev/null; then
+if command -v bat &> /dev/null; then
     alias cat='bat --style=plain'
 fi
 
@@ -62,7 +75,7 @@ alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias la='ls -la --color=auto'
 
-if command -v eza 2>&1 > /dev/null; then
+if command -v eza &> /dev/null; then
     alias x='eza --icons=auto'
     alias xa='eza -a --icons=auto'
     alias xl='eza -l --icons=auto'
@@ -80,20 +93,27 @@ function mkcd {
 }
 
 # Carapace completion
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-source <(carapace _carapace)
+if command -v carapace &> /dev/null; then
+    export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+    source <(carapace _carapace)
+fi
 
 # Load Starship prompt
-eval "$(starship init bash)"
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+fi
 
 # Load Zoxide
-if command -v zoxide 2>&1 > /dev/null; then
+if command -v zoxide &> /dev/null; then
     eval "$(zoxide init bash)"
 fi
 
 # Load direnv
-if command -v direnv 2>&1 > /dev/null; then
+if command -v direnv &> /dev/null; then
     eval "$(direnv hook bash)"
 fi
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# Attach ble.sh
+((_ble_bash)) && ble-attach
