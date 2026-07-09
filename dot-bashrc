@@ -9,6 +9,9 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]]; then
 fi
 export PATH
 
+# Load Rust environment
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 # Uncomment the following line to disable systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -40,15 +43,21 @@ fi
 # If not running interactively, don't do anything else.
 [[ $- != *i* ]] && return
 
-# Make history ignore lines starting with space.
-HISTCONTROL=ignorespace
-
-# Append to the history file, don't overwrite it.
-shopt -s histappend
-
-# History size options
+# History settings
+HISTCONTROL=ignoreboth:erasedups  # ignore space-prefixed lines, drop duplicates
 HISTSIZE=1000
 HISTFILESIZE=10000
+HISTTIMEFORMAT='%F %T '           # timestamp each entry in `history`
+shopt -s histappend               # append to history file, don't overwrite it
+
+# Shell behavior options
+shopt -s autocd        # `foo` instead of `cd foo`
+shopt -s cdspell       # auto-correct minor cd typos
+shopt -s globstar      # enable ** recursive glob
+
+# Default editor
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Disable annoying bell
 bind 'set bell-style none'
@@ -92,28 +101,35 @@ function mkcd {
     mkdir -p "$1" && cd "$1"
 }
 
-# Carapace completion
+# Cache generated init scripts for tools that `eval "$(...)"` on every shell
+# start, regenerating only when missing or the binary is newer than the cache.
+_cache_init() {
+    local bin=$1 cache=$2 gen_cmd=$3
+    if command -v "$bin" &> /dev/null; then
+        if [[ ! -f $cache || $(command -v "$bin") -nt $cache ]]; then
+            mkdir -p "$(dirname "$cache")"
+            eval "$gen_cmd" > "$cache"
+        fi
+        source "$cache"
+    fi
+}
+
+_cache_init starship "$HOME/.cache/shell-init/starship.bash" 'starship init bash'
+_cache_init zoxide   "$HOME/.cache/shell-init/zoxide.bash"   'zoxide init bash'
+_cache_init direnv   "$HOME/.cache/shell-init/direnv.bash"   'direnv hook bash'
+unset -f _cache_init
+
+# Carapace completion (cached the same way, but needs CARAPACE_BRIDGES set first)
 if command -v carapace &> /dev/null; then
     export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-    source <(carapace _carapace)
+    carapace_cache="$HOME/.cache/shell-init/carapace.bash"
+    if [[ ! -f $carapace_cache || $(command -v carapace) -nt $carapace_cache ]]; then
+        mkdir -p "$(dirname "$carapace_cache")"
+        carapace _carapace > "$carapace_cache"
+    fi
+    source "$carapace_cache"
+    unset carapace_cache
 fi
-
-# Load Starship prompt
-if command -v starship &> /dev/null; then
-    eval "$(starship init bash)"
-fi
-
-# Load Zoxide
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init bash)"
-fi
-
-# Load direnv
-if command -v direnv &> /dev/null; then
-    eval "$(direnv hook bash)"
-fi
-
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # Attach ble.sh
 ((_ble_bash)) && ble-attach

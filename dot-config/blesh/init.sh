@@ -5,3 +5,6 @@ ble-bind -f down 'history-search-forward'
 # Transient prompt — replace previous prompt with starship's character symbol
 bleopt prompt_ps1_transient=trim:same-dir
 bleopt prompt_ps1_final='$(starship module character)'
+
+# Enable history share
+bleopt history_share=1
