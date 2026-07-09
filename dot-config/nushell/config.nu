@@ -27,6 +27,7 @@ $env.config.history = {
     max_size: 1_000_000
     sync_on_enter: true
     isolation: true
+    ignore_space_prefixed: true
 }
 
 # Aliases
@@ -47,6 +48,30 @@ alias nv = nvim
 def --env mkcd [folder: path] {
     mkdir $folder
     cd $folder
+}
+
+# Toggles incognito session mode.
+# NOTE: Prefix the call with a space (e.g., ` incognito`) to keep the wrapper itself out of history.
+def incognito [] {
+    if ("INCOGNITO" in $env) {
+        # Inside the incognito shell: signal "toggle off" with a sentinel exit code
+        exit 42
+    } else {
+        print "Incognito mode ON"
+
+        # Launch subshell. `with-env` scopes INCOGNITO strictly to this child process.
+        with-env { INCOGNITO: "1" } {
+            nu --no-history
+        }
+
+        # The child process has closed. Evaluate how it ended.
+        if $env.LAST_EXIT_CODE == 42 {
+            print "Incognito mode OFF"
+        } else {
+            # Propagate standard exits (exit, Ctrl-D) to close the parent window
+            exit $env.LAST_EXIT_CODE
+        }
+    }
 }
 
 # Prepare vendor autoload directory to use for sourcing plugins

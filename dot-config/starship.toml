@@ -4,6 +4,7 @@ format = """
 $username\
 $hostname\
 $shell\
+${custom.incognito}\
 $directory\
 $git_branch\
 $git_state\
@@ -19,6 +20,12 @@ disabled = true
 
 [directory]
 style = "bold blue"
+
+[custom.incognito]
+when = 'printenv INCOGNITO'
+symbol = '👁 '
+style = 'fg:purple bold'
+format = '[$symbol ]($style)'
 
 [shell]
 disabled = false

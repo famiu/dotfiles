@@ -50,6 +50,7 @@ HISTCONTROL=ignoreboth:erasedups  # ignore space-prefixed lines, drop duplicates
 HISTSIZE=1000
 HISTFILESIZE=10000
 HISTTIMEFORMAT='%F %T '           # timestamp each entry in `history`
+HISTIGNORE='incognito*'           # skip incognito commands from history
 shopt -s histappend               # append to history file, don't overwrite it
 
 # Shell behavior options
@@ -101,6 +102,21 @@ alias nv='nvim'
 # Function to create directory and CD to it
 function mkcd {
     mkdir -p "$1" && cd "$1"
+}
+
+# Per-command: `incognito {cmd}` runs {cmd} unrecorded. No-args: toggles incognito session mode.
+incognito() {
+    if [[ $# -gt 0 ]]; then
+        "$@"
+    elif [[ -z $INCOGNITO ]]; then
+        set +o history
+        export INCOGNITO=1
+        echo "Incognito mode ON"
+    else
+        set -o history
+        unset INCOGNITO
+        echo "Incognito mode OFF"
+    fi
 }
 
 # Cache generated init scripts for tools that `eval "$(...)"` on every shell
