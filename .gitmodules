@@ -1,25 +1,9 @@
 [submodule "dot-config/nvim"]
 	path = dot-config/nvim
 	url = git@github.com:famiu/dot-nvim.git
-[submodule "dot-config/zsh/plugins/zsh-autosuggestions"]
-	path = dot-config/zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-	branch = master
-[submodule "dot-config/zsh/plugins/zsh-history-substring-search"]
-	path = dot-config/zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
-	branch = master
-[submodule "dot-config/zsh/plugins/zsh-completions"]
-	path = dot-config/zsh/plugins/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
-	branch = master
 [submodule "dot-config/bash/plugins/blesh"]
 	path = dot-config/bash/plugins/blesh
 	url = https://github.com/akinomyoga/ble.sh.git
-	branch = master
-[submodule "dot-config/zsh/plugins/fast-syntax-highlighting"]
-	path = dot-config/zsh/plugins/fast-syntax-highlighting
-	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git
 	branch = master
 [submodule "dot-config/tmux/plugins/tmux-resurrect"]
 	path = dot-config/tmux/plugins/tmux-resurrect
