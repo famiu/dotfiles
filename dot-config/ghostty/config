@@ -51,6 +51,7 @@ background-blur = true
 gtk-titlebar = false
 macos-titlebar-style = hidden
 maximize = true
+confirm-close-surface = false
 
 # Clear all keybinds, re-define only used ones
 # Helps avoid accidentally using UI features like tabs and splits, which are made redundant by Tmux
