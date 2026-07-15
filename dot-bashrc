@@ -65,6 +65,9 @@ export VISUAL=nvim
 # Disable annoying bell
 bind 'set bell-style none'
 
+# Ignore EOF (Ctrl-D) to exit shell
+set -o ignoreeof
+
 # Fallback readline bindings used when ble.sh is not loaded.
 if ! ((_ble_bash)); then
     bind 'set show-all-if-ambiguous on'
