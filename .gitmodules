@@ -5,9 +5,3 @@
 	path = dot-config/bash/plugins/blesh
 	url = https://github.com/akinomyoga/ble.sh.git
 	branch = master
-[submodule "dot-config/tmux/plugins/tmux-resurrect"]
-	path = dot-config/tmux/plugins/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
-[submodule "dot-config/tmux/plugins/tmux-continuum"]
-	path = dot-config/tmux/plugins/tmux-continuum
-	url = https://github.com/tmux-plugins/tmux-continuum
