@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+screenshot_dir="${SCREENSHOT_DIR:-$HOME/Pictures/Screenshots}"
+quality="${JPEG_QUALITY:-90}"
+
+for cmd in find sort cut fzf magick wl-copy mktemp; do
+    command -v "$cmd" >/dev/null 2>&1 || {
+        printf 'Error: required command not found: %s\n' "$cmd" >&2
+        exit 127
+    }
+done
+
+[[ -d "$screenshot_dir" ]] || {
+    printf 'Error: directory does not exist: %s\n' "$screenshot_dir" >&2
+    exit 1
+}
+
+selected=$(
+    find "$screenshot_dir" -maxdepth 1 -type f -printf '%T@\t%p\n' |
+    sort -t $'\t' -k1,1nr |
+    cut -f2- |
+    fzf --layout=reverse --height=80% --border --prompt='Screenshot › '
+) || exit 0
+
+tmp=$(mktemp --suffix=.jpg)
+
+cleanup_on_error() {
+    status=$?
+    (( status == 0 )) || rm -f -- "$tmp"
+}
+
+trap cleanup_on_error EXIT
+
+magick "$selected" -strip -quality "$quality" "$tmp"
+printf 'file://%s\r\n' "$tmp" | wl-copy --type text/uri-list

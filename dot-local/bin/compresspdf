@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "Usage: $(basename "$0") INPUT.pdf OUTPUT.pdf [preset]"
+    echo "Presets: screen, ebook, printer, prepress, default"
+    echo "Default: ebook"
+}
+
+if ! command -v gs >/dev/null 2>&1; then
+    echo "Error: Ghostscript is not installed or unavailable in PATH." >&2
+    exit 1
+fi
+
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+    usage >&2
+    exit 1
+fi
+
+input="$1"
+output="$2"
+preset="${3:-ebook}"
+
+case "$preset" in
+    screen|ebook|printer|prepress|default) ;;
+    *)
+        echo "Error: invalid preset '$preset'." >&2
+        usage >&2
+        exit 1
+        ;;
+esac
+
+if [ ! -f "$input" ]; then
+    echo "Error: input file does not exist: $input" >&2
+    exit 1
+fi
+
+if [ ! -r "$input" ]; then
+    echo "Error: input file is not readable: $input" >&2
+    exit 1
+fi
+
+if [ "$input" = "$output" ]; then
+    echo "Error: input and output files must be different." >&2
+    exit 1
+fi
+
+output_dir="$(dirname "$output")"
+
+if [ ! -d "$output_dir" ]; then
+    echo "Error: output directory does not exist: $output_dir" >&2
+    exit 1
+fi
+
+if [ ! -w "$output_dir" ]; then
+    echo "Error: output directory is not writable: $output_dir" >&2
+    exit 1
+fi
+
+if [ -e "$output" ]; then
+    read -r -p "Output file already exists. Overwrite it? [y/N] " answer
+
+    case "$answer" in
+        y|Y|yes|YES|Yes) ;;
+        *)
+            echo "Cancelled."
+            exit 0
+            ;;
+    esac
+fi
+
+temp_output="$(mktemp "${output}.tmp.XXXXXX")" || {
+    echo "Error: could not create temporary output file." >&2
+    exit 1
+}
+
+trap 'rm -f -- "$temp_output"' EXIT
+
+if ! gs \
+    -sDEVICE=pdfwrite \
+    -dPDFSETTINGS="/$preset" \
+    -dNOPAUSE \
+    -dQUIET \
+    -dBATCH \
+    -sOutputFile="$temp_output" \
+    "$input"
+then
+    echo "Error: Ghostscript failed to compress the PDF." >&2
+    exit 1
+fi
+
+if ! mv -f -- "$temp_output" "$output"; then
+    echo "Error: could not write the output file: $output" >&2
+    exit 1
+fi
+
+trap - EXIT
+
+echo "Compressed PDF written to: $output"
