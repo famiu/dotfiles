@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export YDOTOOL_SOCKET=/tmp/.ydotool_socket
+
+# Wait for the keys used to invoke the keyboard shortcut to be released.
+sleep "${TYPE_CLIPBOARD_DELAY:-1}"
+
+wl-paste --type text --no-newline |
+    ydotool type --key-delay 10 --file -

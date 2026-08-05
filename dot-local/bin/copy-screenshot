@@ -3,8 +3,13 @@ set -Eeuo pipefail
 
 screenshot_dir="${SCREENSHOT_DIR:-$HOME/Pictures/Screenshots}"
 quality="${JPEG_QUALITY:-90}"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/copy-screenshot"
+clipboard_file="$cache_dir/screenshot.jpg"
+# Delete all Kitty image data and placements without requesting a response.
+readonly KITTY_DELETE_ALL_IMAGES='\033_Ga=d,d=A,q=2;\033\\'
+export KITTY_DELETE_ALL_IMAGES
 
-for cmd in find sort cut fzf magick wl-copy mktemp; do
+for cmd in fzf timg magick wl-copy; do
     command -v "$cmd" >/dev/null 2>&1 || {
         printf 'Error: required command not found: %s\n' "$cmd" >&2
         exit 127
@@ -16,14 +21,35 @@ done
     exit 1
 }
 
+[[ $quality =~ ^([1-9]|[1-9][0-9]|100)$ ]] || {
+    printf 'Error: JPEG_QUALITY must be an integer from 1 to 100.\n' >&2
+    exit 1
+}
+
+mkdir -p -m 700 -- "$cache_dir"
+[[ -w "$cache_dir" ]] || {
+    printf 'Error: directory is not writable: %s\n' "$cache_dir" >&2
+    exit 1
+}
+
+clear_timg_preview() {
+    printf '%b' "$KITTY_DELETE_ALL_IMAGES" > /dev/tty 2>/dev/null || true
+}
+
+trap clear_timg_preview EXIT
+
 selected=$(
     find "$screenshot_dir" -maxdepth 1 -type f -printf '%T@\t%p\n' |
     sort -t $'\t' -k1,1nr |
     cut -f2- |
-    fzf --layout=reverse --height=80% --border --prompt='Screenshot › '
+    fzf --layout=reverse --height=80% --border --prompt='Screenshot › ' \
+        --preview='printf "%b" "$KITTY_DELETE_ALL_IMAGES"; timg -pk --frames=1 -g "${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}" -- {}'
 ) || exit 0
 
-tmp=$(mktemp --suffix=.jpg)
+clear_timg_preview
+trap - EXIT
+
+tmp=$(mktemp --tmpdir="$cache_dir" --suffix=.jpg)
 
 cleanup_on_error() {
     status=$?
@@ -33,4 +59,5 @@ cleanup_on_error() {
 trap cleanup_on_error EXIT
 
 magick "$selected" -strip -quality "$quality" "$tmp"
-printf 'file://%s\r\n' "$tmp" | wl-copy --type text/uri-list
+mv -f -- "$tmp" "$clipboard_file"
+printf 'file://%s\r\n' "$clipboard_file" | wl-copy --type text/uri-list
