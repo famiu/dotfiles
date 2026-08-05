@@ -1,0 +1,18 @@
+onboarding = false
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+a"
+split_vertical = "prefix+backslash"
+switch_tab = ["alt+1..9"]
+switch_workspace = "prefix+1..9"
+last_pane = "prefix+backtick"
+
+[experimental]
+kitty_graphics = true
+
+[ui.toast]
+delivery = "terminal"
