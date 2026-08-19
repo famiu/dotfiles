@@ -1,0 +1,10 @@
+mattpocock/skills@diagnosing-bugs
+mattpocock/skills@domain-modeling
+mattpocock/skills@grilling
+mattpocock/skills@grill-me
+mattpocock/skills@grill-with-docs
+agent-sh/computer-use-linux@computer-use-linux
+vercel-labs/skills@find-skills
+cli/cli@gh
+herdrdev/herdr@herdr
+cursor/plugins@unslop
