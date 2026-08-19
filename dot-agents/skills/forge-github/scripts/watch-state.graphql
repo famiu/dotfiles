@@ -1,0 +1,66 @@
+query($owner: String!, $name: String!, $number: Int!) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
+      state
+      closed
+      mergedAt
+      isDraft
+      headRefOid
+      updatedAt
+      mergeable
+      mergeStateStatus
+      reviewDecision
+      reviewRequests(first: 100) {
+        totalCount
+        nodes {
+          requestedReviewer {
+            __typename
+            ... on User { login }
+            ... on Team { slug }
+          }
+        }
+      }
+      reviews(last: 100) {
+        totalCount
+        nodes {
+          id
+          state
+          submittedAt
+          author { login }
+          commit { oid }
+        }
+      }
+      comments(last: 1) {
+        totalCount
+        nodes { id updatedAt }
+      }
+      reviewThreads(last: 100) {
+        totalCount
+        nodes {
+          id
+          isResolved
+          comments(last: 1) {
+            totalCount
+            nodes { id updatedAt }
+          }
+        }
+      }
+      commits(last: 1) {
+        nodes {
+          commit {
+            statusCheckRollup {
+              state
+              contexts(last: 100) {
+                nodes {
+                  __typename
+                  ... on CheckRun { id name status conclusion completedAt }
+                  ... on StatusContext { id context state }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
