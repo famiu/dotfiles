@@ -60,6 +60,8 @@ Once a PR has agent attribution, preserve it unchanged during all later updates,
 
 ## Create or update
 
+If asked to use the web workflow or let the user submit the PR themselves, use the active forge's browser-based creation flow and stop before submission.
+
 For a new PR, confirm that the source branch is published and no matching open PR exists. Ask the forge to create it with explicit source, target, title, body, and requested draft state. Apply optional metadata only when requested or required by repository policy.
 
 For an existing PR, read its current metadata first and change only stale or requested fields. Preserve accurate human-authored context, links, checklists, and release notes. Correct stale metadata directly instead of posting a comment, and do not rewrite existing discussion.
