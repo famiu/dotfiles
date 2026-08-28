@@ -7,7 +7,7 @@ description: Create or update a pull request, merge request, or equivalent forge
 
 Create or update one merge-bound change proposal. In this skill, **PR** means a pull request, merge request, or forge equivalent.
 
-Use `git` for local history and diffs and the active forge skill for remote operations. Repository conventions and explicit user instructions override content and workflow defaults, but do not waive attribution, safety, or authorization requirements.
+Use `git` for local history and diffs and the active forge skill for remote operations. Repository conventions and explicit user instructions override content and workflow defaults, but do not waive safety or authorization requirements. At the user's explicit request, omit any attribution required by this workflow.
 
 ## Resolve the forge
 

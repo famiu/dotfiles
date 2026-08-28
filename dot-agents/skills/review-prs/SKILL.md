@@ -9,6 +9,8 @@ Review one change proposal at its current head and publish the result. In this s
 
 This is a one-shot reviewer workflow. Do not change code, push commits, edit PR metadata, resolve discussions, or perform author-side actions. Do not continue monitoring after posting. If the user explicitly requests report-only output, return the review without posting it.
 
+At the user's explicit request, omit any attribution required by this workflow.
+
 ## Resolve the forge
 
 Resolve the host from an explicit PR URL, otherwise from the repository remote. Before any remote operation, load the unique available `forge-<provider>` skill whose description supports that host.

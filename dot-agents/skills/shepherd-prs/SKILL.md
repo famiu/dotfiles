@@ -7,7 +7,7 @@ description: Shepherd a pull request, merge request, or equivalent forge change 
 
 Own one merge-bound change proposal until a stop condition applies. In this skill, **PR** means a pull request, merge request, or forge equivalent.
 
-Use `git` for local branch operations and the active forge skill for remote operations. Repository conventions and explicit user instructions override workflow defaults, but do not waive attribution, safety, or authorization requirements.
+Use `git` for local branch operations and the active forge skill for remote operations. Repository conventions and explicit user instructions override workflow defaults, but do not waive safety or authorization requirements. At the user's explicit request, omit any attribution required by this workflow.
 
 For a new PR, complete and verify `create-prs` first. For read-only monitoring, report relevant events without changing code, remote state, or discussion.
 
