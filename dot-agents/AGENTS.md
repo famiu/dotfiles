@@ -49,6 +49,11 @@
 * When a task requires interacting with a graphical interface, use the Computer Use skill.
 * Prefer a reliable API, CLI, or other direct programmatic interface when one is available and more appropriate.
 
+## Check Before Making Claims
+
+* Check a file or source again before relying on it if it may have changed since you last read it. Do not re-read stable information without a reason.
+* Say what you observed. If you drew a conclusion, make that clear.
+
 ## Context7
 
 - When a task depends on current documentation for a library, framework, SDK, API, CLI tool, or cloud service, use the Context7 skill.
