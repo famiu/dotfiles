@@ -57,6 +57,7 @@ while IFS= read -r sm; do
 done < <(git submodule status | awk '{print $2}')
 
 dirty_submodules=()
+diverged_submodules=()
 clean_submodules=()
 unregistered_submodules=()
 for sm in "${declared_submodules[@]}"; do
@@ -64,6 +65,13 @@ for sm in "${declared_submodules[@]}"; do
         # No gitlink means no pinned commit to check out. Updating would clone whatever's on the remote's default
         # branch right now, unpinned. Skip it.
         unregistered_submodules+=("$sm")
+        continue
+    fi
+
+    # A clean working tree can still be checked out at a different commit than the parent repository pins.
+    # Updating such a submodule would move it and discard the local checkout state.
+    if [[ "$(git submodule status -- "$sm")" == +* ]]; then
+        diverged_submodules+=("$sm")
         continue
     fi
 
@@ -82,6 +90,11 @@ fi
 if (( ${#dirty_submodules[@]} > 0 )); then
     echo "Skipping dirty submodules:"
     printf '  %s\n' "${dirty_submodules[@]}"
+fi
+
+if (( ${#diverged_submodules[@]} > 0 )); then
+    echo "Skipping submodules checked out at a different commit:"
+    printf '  %s\n' "${diverged_submodules[@]}"
 fi
 
 if (( ${#clean_submodules[@]} > 0 )); then
