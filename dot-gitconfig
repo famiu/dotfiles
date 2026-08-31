@@ -1,0 +1,17 @@
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[credential]
+	helper = libsecret
+
+[init]
+	defaultBranch = main
+
+[fetch]
+	prune = true
+
+[include]
+	path = ~/.gitconfig.local
