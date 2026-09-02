@@ -12,6 +12,7 @@
 
 [fetch]
 	prune = true
+	pruneTags = true
 
 [include]
 	path = ~/.gitconfig.local
