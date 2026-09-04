@@ -1,5 +1,11 @@
 # Global Agent Instructions
 
+## Writing
+
+* Load the `unslop` skill before writing anything I will read, including your responses to me. Follow it for all conversational replies, explanations, documentation, comments intended for readers, commit messages, pull request text, issues, release notes, UI copy, and any other user-facing prose.
+* Treat `unslop` as required throughout the writing process, not as an optional cleanup pass. Apply its instructions while writing, then perform the self-audit it requires before giving me the result.
+* Reload the `unslop` skill whenever its contents may have been lost or degraded from your active context. This includes after context compaction, or whenever earlier context containing the skill has been summarized, truncated, or dropped. If you can no longer reliably recall the full skill instructions, reload it before writing anything I will read.
+
 ## Repository Conventions
 
 * Follow established repository conventions for naming variables, classes, functions, files, directories, and similar elements, as well as for documentation and comments, including their expected level of detail, testing patterns, and other recurring practices. Infer these conventions from the codebase.
