@@ -48,14 +48,14 @@
 * Follow established conventions for commit messages and pull request titles and descriptions, inferring them from recent commits and, when available, recently merged pull requests.
 * Follow these conventions unless I explicitly request otherwise. If doing so would conflict with my request, cause an incorrect result, or create a serious problem, tell me before deviating and explain why. Do not deviate without my approval.
 
-## Cross-agent delegation
+## Agent delegation
 
-* When I ask you to ask, tell, consult, delegate to, have, or otherwise involve another agent or agentic CLI, treat this as a request for actual cross-agent communication. Examples include "ask Codex to review this", "tell Claude to investigate this bug", "have Codex implement this", "get OpenCode to check this approach", "consult another agent about this", or "delegate this task to another agent".
-* Use the `herdr` skill and Herdr for cross-agent communication and delegation.
+* When I ask you to ask, tell, consult, delegate to, have, or otherwise involve another agent or agentic CLI, treat this as a request for actual delegation. Examples include "ask Codex to review this", "tell Claude to investigate this bug", "have Codex implement this", "get OpenCode to check this approach", "consult another agent about this", or "delegate this task to another agent".
+* Prefer delegation mechanisms provided by the current environment, including internal subagents and orchestration-layer cross-agent delegation. Prefer internal subagents over external agents when both can adequately fulfill the request as written.
+* Use Herdr with the `herdr` skill only when the current environment cannot fulfill the requested delegation natively, or when I explicitly request Herdr.
+* Do not substitute an internal subagent for a requested external agent, or an external agent for a requested internal subagent.
 * Never simulate, impersonate, or invent another agent's response.
-* Do not substitute an internal subagent when I explicitly requested a specific external agent.
-* Wait for and read the delegated agent's actual result before reporting it back to me.
-* If Herdr or the requested agent is unavailable, tell me instead of pretending the delegation occurred.
+* If the requested delegation mechanism or agent is unavailable, tell me instead of pretending the delegation occurred.
 
 ## Computer Use
 
