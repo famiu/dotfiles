@@ -1,41 +1,118 @@
-#!/bin/bash
-set -eo pipefail
+#!/usr/bin/env bash
+set -euo pipefail
 
-if [ -z "$1" ]; then
-    echo "Usage: $0 <path_or_url>" >&2
+error() {
+    printf '\033[31mERROR: %s\033[0m\n' "$*" >&2
+}
+
+warning() {
+    printf '\033[33mWARNING: %s\033[0m\n' "$*" >&2
+}
+
+checksum() {
+    sha256sum "$1" | awk '{print $1}'
+}
+
+usage() {
+    echo "Usage: $0 <path_or_url> [-- <command> [args...]]" >&2
+    echo "       By default, the inspected file is appended to the command" >&2
+    echo "       Use '{}' to specify its position instead" >&2
+}
+
+if [[ $# -lt 1 ]]; then
+    usage
     exit 1
 fi
 
-EDITOR="${EDITOR:-vi}"
 TARGET="$1"
-TEMP_FILE=$(mktemp /tmp/inspect_script.XXXXXX.sh)
+shift
 
-# Ensure cleanup of temp file
-trap 'rm -f "$TEMP_FILE"' EXIT
+if [[ $# -eq 0 ]]; then
+    COMMAND=(bash)
+elif [[ "$1" == "--" ]]; then
+    shift
 
-if [ -f "$TARGET" ]; then
-    cp "$TARGET" "$TEMP_FILE"
-elif [[ "$TARGET" =~ ^https?:// ]]; then
-    echo "Fetching script..."
-    curl -LsSf "$TARGET" > "$TEMP_FILE"
+    if [[ $# -eq 0 ]]; then
+        error "No command specified after '--'"
+        exit 1
+    fi
+
+    COMMAND=("$@")
 else
-    echo "Error: '$TARGET' is neither a local file nor an HTTP(S) URL." >&2
+    usage
     exit 1
 fi
+
+EDITOR="${VISUAL:-${EDITOR:-vi}}"
+TEMP_FILE=$(mktemp "${TMPDIR:-/tmp}/inspect_script.XXXXXX.sh")
+
+cleanup() {
+    rm -f -- "$TEMP_FILE"
+}
+
+trap cleanup EXIT
+
+if [[ -f "$TARGET" ]]; then
+    cp -- "$TARGET" "$TEMP_FILE"
+elif [[ "$TARGET" =~ ^https:// ]]; then
+    echo "Fetching script..."
+    curl -LsSf \
+        --proto '=https' \
+        --proto-redir '=https' \
+        --output "$TEMP_FILE" \
+        "$TARGET"
+elif [[ "$TARGET" =~ ^http:// ]]; then
+    error "Refusing insecure HTTP URL"
+    exit 1
+else
+    error "'$TARGET' is neither a local file nor an HTTPS URL"
+    exit 1
+fi
+
+HAS_PLACEHOLDER=0
+
+for i in "${!COMMAND[@]}"; do
+    if [[ "${COMMAND[$i]}" == "{}" ]]; then
+        COMMAND[$i]="$TEMP_FILE"
+        HAS_PLACEHOLDER=1
+    fi
+done
+
+if (( ! HAS_PLACEHOLDER )); then
+    COMMAND+=("$TEMP_FILE")
+fi
+
+EXPECTED_CHECKSUM=$(checksum "$TEMP_FILE")
 
 echo "Opening in editor for inspection..."
-"$EDITOR" "$TEMP_FILE" || true
+
+# Treat EDITOR as a shell command while passing the filename separately as $1
+sh -c "$EDITOR \"\$1\"" _ "$TEMP_FILE" || true
+
+CURRENT_CHECKSUM=$(checksum "$TEMP_FILE")
+
+if [[ "$CURRENT_CHECKSUM" != "$EXPECTED_CHECKSUM" ]]; then
+    warning "Script was modified during inspection"
+    EXPECTED_CHECKSUM="$CURRENT_CHECKSUM"
+fi
 
 echo
-read -p "Execute this script? (y/N): " choice
+read -r -p "Execute this script? (y/N): " choice
 
 case "$choice" in
     [Yy]*)
+        CURRENT_CHECKSUM=$(checksum "$TEMP_FILE")
+
+        if [[ "$CURRENT_CHECKSUM" != "$EXPECTED_CHECKSUM" ]]; then
+            error "Script was modified after inspection; refusing to execute"
+            exit 1
+        fi
+
         echo "Executing..."
         echo "----------------------------------------"
-        bash "$TEMP_FILE"
+        "${COMMAND[@]}"
         ;;
     *)
-        echo "Cancelled."
+        echo "Cancelled"
         ;;
 esac
