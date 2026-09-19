@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_name=${0##*/}
+
+usage() {
+    cat <<EOF
+Usage:
+  $script_name INPUT_VIDEO "CAPTION" [OUTPUT_VIDEO]
+
+Examples:
+  $script_name input.mp4 "me spending 4 hours automating a 30 second task"
+  $script_name input.mp4 "TOP TEXT
+SECOND LINE" output.mp4
+
+Optional environment variables:
+  MEME_FONT       ImageMagick font name/path (default: DejaVu-Sans-Bold)
+  MEME_FONT_SIZE  Font size in points (default: calculated from video width)
+EOF
+}
+
+if (( $# < 2 || $# > 3 )); then
+    usage >&2
+    exit 2
+fi
+
+for cmd in ffmpeg ffprobe magick; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Error: '$cmd' is required but was not found in PATH." >&2
+        exit 1
+    fi
+done
+
+input=$1
+caption=$2
+
+if [[ ! -f "$input" ]]; then
+    echo "Error: input file does not exist: $input" >&2
+    exit 1
+fi
+
+if [[ -z "$caption" ]]; then
+    echo "Error: caption must not be empty." >&2
+    exit 1
+fi
+
+if (( $# == 3 )); then
+    output=$3
+else
+    base=${input%.*}
+    output="${base}-meme.mp4"
+fi
+
+if [[ "$input" == "$output" ]]; then
+    echo "Error: output must be different from input." >&2
+    exit 1
+fi
+
+width=$(
+    ffprobe -v error \
+        -select_streams v:0 \
+        -show_entries stream=width \
+        -of csv=p=0 \
+        "$input"
+)
+
+height=$(
+    ffprobe -v error \
+        -select_streams v:0 \
+        -show_entries stream=height \
+        -of csv=p=0 \
+        "$input"
+)
+
+if [[ ! "$width" =~ ^[0-9]+$ || ! "$height" =~ ^[0-9]+$ ]]; then
+    echo "Error: could not determine video dimensions." >&2
+    exit 1
+fi
+
+font=${MEME_FONT:-DejaVu-Sans-Bold}
+
+if [[ -n "${MEME_FONT_SIZE:-}" ]]; then
+    font_size=$MEME_FONT_SIZE
+else
+    # About 49 pt for a 1080 px-wide video, 87 pt for 1920 px.
+    font_size=$(( width / 22 ))
+    (( font_size < 28 )) && font_size=28
+    (( font_size > 96 )) && font_size=96
+fi
+
+# Horizontal padding is 5% of the video width.
+pad_x=$(( width / 20 ))
+(( pad_x < 20 )) && pad_x=20
+
+# Vertical padding scales with the selected font size.
+pad_y=$(( font_size / 2 ))
+(( pad_y < 12 )) && pad_y=12
+
+text_width=$(( width - 2 * pad_x ))
+if (( text_width <= 0 )); then
+    echo "Error: video is too narrow to create the caption area." >&2
+    exit 1
+fi
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+
+caption_png="$tmpdir/caption.png"
+
+# Leaving the height unspecified ("WIDTHx") lets ImageMagick determine the
+# required height after wrapping the caption.
+magick \
+    -background white \
+    -fill black \
+    -font "$font" \
+    -pointsize "$font_size" \
+    -gravity center \
+    -size "${text_width}x" \
+    caption:"$caption" \
+    -bordercolor white \
+    -border "${pad_x}x${pad_y}" \
+    "$caption_png"
+
+caption_height=$(magick identify -format '%h' "$caption_png")
+
+# H.264/yuv420p works best with even frame dimensions. If necessary, add a
+# single white row beneath the caption area.
+header_height=$caption_height
+if (( (height + header_height) % 2 != 0 )); then
+    header_height=$(( header_height + 1 ))
+fi
+
+ffmpeg -hide_banner -y \
+    -i "$input" \
+    -i "$caption_png" \
+    -filter_complex \
+        "[0:v]pad=iw:ih+${header_height}:0:${header_height}:white[base]; \
+         [base][1:v]overlay=0:0:eof_action=repeat[v]" \
+    -map "[v]" \
+    -map 0:a? \
+    -c:v libx264 \
+    -crf 18 \
+    -preset medium \
+    -pix_fmt yuv420p \
+    -c:a copy \
+    "$output"
+
+echo "Created: $output"
