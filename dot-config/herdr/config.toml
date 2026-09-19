@@ -16,3 +16,6 @@ kitty_graphics = true
 
 [ui.toast]
 delivery = "terminal"
+
+[ui]
+agent_panel_sort = "priority"
