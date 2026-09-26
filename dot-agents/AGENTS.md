@@ -52,7 +52,6 @@
 
 * When I ask you to ask, tell, consult, delegate to, have, or otherwise involve another agent or agentic CLI, treat this as a request for actual delegation. Examples include "ask Codex to review this", "tell Claude to investigate this bug", "have Codex implement this", "get OpenCode to check this approach", "consult another agent about this", or "delegate this task to another agent".
 * Prefer delegation mechanisms provided by the current environment, including internal subagents and orchestration-layer cross-agent delegation. Prefer internal subagents over external agents when both can adequately fulfill the request as written.
-* Use Herdr with the `herdr` skill only when the current environment cannot fulfill the requested delegation natively, or when I explicitly request Herdr.
 * Do not substitute an internal subagent for a requested external agent, or an external agent for a requested internal subagent.
 * Never simulate, impersonate, or invent another agent's response.
 * If the requested delegation mechanism or agent is unavailable, tell me instead of pretending the delegation occurred.
