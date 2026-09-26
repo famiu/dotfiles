@@ -7,6 +7,64 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+    "proxy": "",
+    "agent": {
+        "sidebar_side": "right",
+        "favorite_models": [],
+        "model_parameters": []
+    },
+    "project_panel": {
+        "git_status_indicator": true,
+        "dock": "right"
+    },
+    "tabs": {
+        "show_diagnostics": "off",
+        "file_icons": true
+    },
+    "git": {
+        "inline_blame": {
+            "show_commit_summary": true
+        }
+    },
+    "semantic_tokens": "combined",
+    "inlay_hints": {
+        "enabled": true
+    },
+    "format_on_save": "modifications",
+    "markdown_preview": {
+
+    },
+    "edit_predictions": {
+        "allow_data_collection": "no",
+        "provider": "copilot"
+    },
+    "agent_servers": {
+        "claude-acp": {
+            "type": "registry"
+        },
+        "codex-acp": {
+            "default_config_options": {
+                "reasoning_effort": "low",
+                "collaboration_mode": "default",
+                "mode": "read-only",
+                "model": "gpt-6-astra"
+            },
+            "type": "registry"
+        },
+        "github-copilot-cli": {
+            "type": "registry"
+        }
+    },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false,
+        "anthropic_retention": false
+    },
+    "icon_theme": {
+        "mode": "system",
+        "light": "Zed (Default)",
+        "dark": "Zed (Default)"
+    },
     "auto_install_extensions": {
         "nvim-nightfox": true,
         "html": true,
@@ -14,39 +72,28 @@
         // Custom language servers
         "basedpyright": true
     },
-    "features": {
-        "edit_prediction_provider": "zed"
-    },
     "theme": {
-        "mode": "dark",
-        "light": "Dawnfox",
-        "dark": "Carbonfox"
-    },
-    "assistant": {
-        "default_model": {
-            "provider": "zed.dev",
-            "model": "claude-3-5-sonnet-latest"
-        },
-        "version": "2"
+        "mode": "system",
+        "light": "Catppuccin Latte",
+        "dark": "Catppuccin Mocha"
     },
     "terminal": {
         "line_height": "standard"
     },
-    "base_keymap": "Atom",
+    "base_keymap": "Zed",
 
     // Editor settings
     "vim_mode": true,
     "tab_size": 4,
-    "hard_tabs": false,
-    "soft_wrap": "preferred_line_length",
-    "preferred_line_length": 80,
+    "hard_tabs": true,
+    "soft_wrap": "editor_width",
     "show_signature_help_after_edits": true,
-    "relative_line_numbers": true,
+    "relative_line_numbers": "enabled",
 
     // UI settings
-    "buffer_font_family": "Fira Code",
-    "buffer_font_size": 16,
-    "ui_font_size": 16,
+    "buffer_font_family": "JetBrains Mono",
+    "buffer_font_size": 20.0,
+    "ui_font_size": 21.0,
     "pane_split_direction_horizontal": "down",
     "pane_split_direction_vertical": "right",
     "use_system_prompts": false,

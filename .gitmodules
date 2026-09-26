@@ -1,6 +1,3 @@
-[submodule "dot-config/nvim"]
-	path = dot-config/nvim
-	url = git@github.com:famiu/dot-nvim.git
 [submodule "dot-config/bash/plugins/blesh"]
 	path = dot-config/bash/plugins/blesh
 	url = https://github.com/akinomyoga/ble.sh.git
