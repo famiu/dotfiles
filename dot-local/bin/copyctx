@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Copies one or more files to the clipboard as formatted context:
+#
+#   `<file_path>`:
+#   ```
+#   <file contents>
+#   ```
+
+error() {
+    printf '\033[31mERROR: %s\033[0m\n' "$*" >&2
+}
+
+usage() {
+    echo "Usage: $0 [-a|-r] <file> [file...]" >&2
+    echo "       -a  Use absolute paths, \$HOME is shortened to ~" >&2
+    echo "       -r  Use paths relative to the current directory (default)" >&2
+}
+
+format_path() {
+    local file="$1"
+    local path
+
+    if [[ "$PATH_MODE" == "absolute" ]]; then
+        path=$(realpath -- "$file")
+
+        if [[ "$path" == "$HOME/"* ]]; then
+            path="~/${path#"$HOME/"}"
+        fi
+    else
+        path=$(realpath --relative-to="$PWD" -- "$file")
+    fi
+
+    printf '%s' "$path"
+}
+
+print_file() {
+    local file="$1"
+    local path
+    local last_char
+
+    path=$(format_path "$file")
+
+    printf '`%s`:\n```\n' "$path"
+    cat -- "$file"
+
+    if [[ -s "$file" ]]; then
+        last_char="$(tail -c 1 -- "$file"; printf x)"
+
+        if [[ "$last_char" != $'\nx' ]]; then
+            printf '\n'
+        fi
+    fi
+
+    printf '```\n'
+}
+
+copy_to_clipboard() {
+    if command -v wl-copy >/dev/null 2>&1; then
+        wl-copy
+    elif command -v xclip >/dev/null 2>&1; then
+        xclip -selection clipboard
+    else
+        error "Neither wl-copy nor xclip is installed"
+        exit 1
+    fi
+}
+
+PATH_MODE="relative"
+
+case "${1:-}" in
+    -a)
+        PATH_MODE="absolute"
+        shift
+        ;;
+    -r)
+        shift
+        ;;
+esac
+
+if [[ $# -lt 1 ]]; then
+    usage
+    exit 1
+fi
+
+FILES=("$@")
+
+for file in "${FILES[@]}"; do
+    if [[ ! -f "$file" ]]; then
+        error "'$file' is not a file"
+        exit 1
+    fi
+done
+
+{
+    for i in "${!FILES[@]}"; do
+        print_file "${FILES[$i]}"
+
+        if (( i < ${#FILES[@]} - 1 )); then
+            printf '\n'
+        fi
+    done
+} | copy_to_clipboard
