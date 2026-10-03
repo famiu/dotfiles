@@ -1,11 +1,5 @@
 # Global Agent Instructions
 
-## Writing
-
-* Load the `unslop` skill before writing anything I or any human may read, including your responses to me, commit messages, pull request titles and descriptions, code comments, and any other user-facing prose or artifacts.
-* Treat `unslop` as required throughout the writing process, not as an optional cleanup pass. Apply its instructions while writing, then perform its self-audit before before finalizing the writing.
-* Reload `unslop` after context compaction or whenever its contents may have been summarized, truncated, or dropped. If you cannot reliably recall the full skill instructions, reload it before producing anything covered by the first bullet point.
-
 ## Deriving context
 
 * Before making any nontrivial changes, inspect enough of the environment to understand what you are changing and why. Do not rely on assumptions when surrounding state, structure, configuration, or documentation could affect the correct approach.
