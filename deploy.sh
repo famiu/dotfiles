@@ -102,3 +102,16 @@ if (( ${#clean_submodules[@]} > 0 )); then
 fi
 
 stow --dotfiles -t "$HOME" $ACTION .
+
+# Claude specific symlinks
+case "$ACTION" in
+    -D)
+        rm -f "$HOME/.claude/CLAUDE.md"
+        rm -f "$HOME/.claude/skills"
+        ;;
+    *)
+        mkdir -p "$HOME/.claude"
+        ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+        ln -sfn "$HOME/.agents/skills" "$HOME/.claude/skills"
+        ;;
+esac
