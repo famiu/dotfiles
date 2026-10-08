@@ -35,7 +35,7 @@ The forge skill owns provider-specific reads and writes; this skill owns decisio
 2. Read repository agent instructions, contribution guidance, and PR conventions.
 3. Resolve the authenticated forge identity on whose behalf the agent acts.
 4. Load or create an activity checkpoint outside the repository under a stable forge/repository/PR key.
-5. Capture the separate detector checkpoint.
+5. When using the forge watcher, capture its separate detector checkpoint.
 6. Fetch authoritative state through the forge: diff and commits, lifecycle and draft state, branch divergence, reviews and requests, discussion and threads, mergeability, checks, and known automated reviewers.
 7. Classify existing feedback before marking it handled.
 
@@ -101,7 +101,7 @@ Use the forge's native discussion mechanism. Keep inline or threaded feedback in
 Every agent-authored top-level comment, review body, inline or threaded reply, and request asking a human to merge must begin with exactly one attribution:
 
 ```markdown
-`<model-slug>` posting via `<harness-name>` on behalf of `<forge-identity>`:
+`<model-slug>` posting via `<harness-name>` on behalf of <forge-identity>:
 
 <comment contents>
 ```
@@ -116,7 +116,9 @@ When all known blockers are clear, required checks pass, and review requirements
 
 ## Block on changes
 
-Use the active forge's session-owned blocking watcher as the only idle polling loop. Keep its detector checkpoint separate from the activity checkpoint.
+When the environment provides a tool that monitors a PR and wakes the agent on changes, use it as the only idle wait, following that tool's own usage instructions. Treat each wakeup only as a hint; refresh authoritative state before acting. An action likely to cause remote activity starts a new cycle immediately.
+
+Otherwise, use the active forge's session-owned blocking watcher as the only idle polling loop. Keep its detector checkpoint separate from the activity checkpoint.
 
 ```text
 detector checkpoint -> authoritative forge refresh -> process -> exhaust work -> watch
@@ -132,4 +134,4 @@ Stop only when the PR is merged, closed, deleted, or superseded; the user stops,
 
 Rate limits, network failures, failing CI, conflicts, pending reviews, reviewer inactivity, pending user decisions, and lack of immediate work are not stop conditions. When a user decision is needed, pause only dependent actions and continue independent work and monitoring.
 
-At a terminal state, report the PR URL and confirmed state. When interrupted, blocked, or handed off, preserve and identify both checkpoints and report the URL, last confirmed state, outstanding feedback, checks, blockers, and what is needed to resume.
+At a terminal state, report the PR URL and confirmed state. When interrupted, blocked, or handed off, preserve and identify the activity checkpoint and any detector checkpoint, and report the URL, last confirmed state, outstanding feedback, checks, blockers, and what is needed to resume.

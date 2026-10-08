@@ -211,7 +211,7 @@ After every write, read back the changed object and return its durable ID or res
 
 ## Blocking watcher
 
-Resolve this skill's absolute directory as `<skill-dir>`, then invoke its watcher:
+Use this watcher only when the environment provides no tool that monitors PRs. Resolve this skill's absolute directory as `<skill-dir>`, then invoke its watcher:
 
 ```bash
 <skill-dir>/scripts/watch-pr.sh checkpoint \
