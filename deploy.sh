@@ -101,6 +101,12 @@ if (( ${#clean_submodules[@]} > 0 )); then
     git submodule update --init --recursive -- "${clean_submodules[@]}"
 fi
 
+# Without an existing ~/.claude, stow would fold it into a symlink to the repository, and Claude Code would write its
+# credentials and session data into the repository.
+if [[ "$ACTION" != "-D" ]]; then
+    mkdir -p "$HOME/.claude"
+fi
+
 stow --dotfiles -t "$HOME" $ACTION .
 
 # Claude specific symlinks
@@ -110,7 +116,6 @@ case "$ACTION" in
         rm -f "$HOME/.claude/skills"
         ;;
     *)
-        mkdir -p "$HOME/.claude"
         ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
         ln -sfn "$HOME/.agents/skills" "$HOME/.claude/skills"
         ;;

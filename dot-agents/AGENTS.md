@@ -49,6 +49,8 @@
 * Do not substitute an internal subagent for a requested external agent, or an external agent for a requested internal subagent.
 * Never simulate, impersonate, or invent another agent's response.
 * If the requested delegation mechanism or agent is unavailable, tell me instead of pretending the delegation occurred.
+* You may delegate to subagents without being asked when doing so saves meaningful work or context, such as broad searches, independent subtasks, or well-specified implementation. Keep planning, difficult reasoning, design decisions, documentation (especially user-facing documentation), and integration of results in the main agent.
+* Give each delegated task a self-contained brief covering the goal, relevant context, constraints, and expected output.
 
 ## Computer Use
 
