@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "enabledPlugins": {
+    "context7@anthropic-plugin-directory": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "feedbackDrafts": "notify",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "theme": "auto",
+  "editorMode": "vim",
+  "autoCompactEnabled": true,
+  "switchModelsOnFlag": false,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "model": "opus",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
+}
