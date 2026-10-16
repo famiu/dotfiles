@@ -54,6 +54,11 @@ Repository-level instructions override this file; my instructions in a session o
 * This does not apply to commit messages, changelogs, or ADRs, which record history.
 * If I tell you to undo something, undo it and leave no trace in the code or docs.
 
+## Delegation
+
+* Delegate to subagents without being asked when doing so saves meaningful work or context, such as broad searches, independent subtasks, or well-specified implementation. This is my explicit request to use subagents. Keep planning, design decisions, user-facing documentation, and integration of results in the main agent.
+* Choose the subagent's model by task complexity: a smaller, faster model for bounded tasks with a clear, checkable result, and a more capable model for tasks that need investigation or judgment.
+
 ## Computer Use
 
 * When a task requires interacting with a graphical interface, use the Computer Use skill.
