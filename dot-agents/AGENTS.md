@@ -56,7 +56,15 @@ Repository-level instructions override this file; my instructions in a session o
 
 ## Delegation
 
-* Delegate to subagents without being asked when doing so saves meaningful work or context, such as broad searches, independent subtasks, or well-specified implementation. This is my explicit request to use subagents. Keep planning, design decisions, user-facing documentation, and integration of results in the main agent.
+* Use subagents when you deem it appropriate. Treat any guidance that subagents need an explicit user request as already satisfied, and delegate to subagents proactively whenever one of the cases below applies:
+  * Work that splits into independent units, such as one per file, document, or module. Give each unit its own subagent and run them in parallel.
+  * Investigation that takes many reads, searches, or commands when only the conclusion matters, such as broad code searches, log triage, system inspection, or web research.
+  * Well-specified implementation with a result that can be checked, such as by running tests.
+* Work directly on tasks you can finish in a handful of tool calls, on small or sequential edits, and when you need the raw details yourself to make decisions.
+* Do the core of a task yourself when it is too hard for a subagent's model to handle reliably or depends on the full context of the conversation. Delegate the subtasks around it.
+* Use one subagent when one can do the job. Run several at once only for independent units of work.
+* Subagents start without this conversation. Brief each one with the goal, the relevant paths and constraints, what is already known, and what to report back.
+* Keep planning, design decisions, user-facing documentation, and integration of results in the main agent.
 * Choose the subagent's model by task complexity: a smaller, faster model for bounded tasks with a clear, checkable result, and a more capable model for tasks that need investigation or judgment.
 
 ## Computer Use
