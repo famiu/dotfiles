@@ -1,4 +1,3 @@
-mattpocock/skills@diagnosing-bugs
 mattpocock/skills@domain-modeling
 mattpocock/skills@grilling
 mattpocock/skills@grill-me

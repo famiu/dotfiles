@@ -40,8 +40,16 @@ Repository-level instructions override this file; my instructions in a session o
 
 * Follow established repository conventions for code, naming, structure, documentation, testing, and other recurring practices. Infer them from the codebase.
 * For code comments specifically, match when and where comments are used, what they explain, their phrasing, and their level of detail.
-* Follow established conventions for commit messages and pull request titles and descriptions, inferring them from recent commits and, when available, recently merged pull requests.
 * Follow these conventions unless I explicitly request otherwise. If following them would conflict with my request, cause an incorrect result, or create a serious problem, deviate as needed and say so and why.
+
+## Commit messages and pull requests
+
+* Use conventional commits.
+* The commit subject says what the change does, not which files it touches. Keep it within 72 characters.
+* The body should contain what the reader needs that the subject can't: the reason for the change when it isn't self-evident, and anything else such as how to use a new feature or whether existing behaviour breaks. Leave out the body when the subject already tells the reader everything they need. For example, `feat: add a dark theme` needs no body, but `fix(upload): limit uploads to two at a time` needs one, such as "The storage provider throttles accounts that open more connections, so large batches failed partway through."
+* Commit messages and pull request titles and descriptions should describe what the change achieves, not how it achieves it. Mention the approach only when it was a deliberate choice a reader needs to know about, such as why an obvious alternative wasn't used. Anything that can be easily inferred from reading the diff does not belong in either. The sole exception being that a pull request description may give reviewers a brief overview of the changes.
+* If a change does several things, split it into separate commits when each can stand on its own. Otherwise, make the subject describe the main change and use the body for the rest.
+* A repository's documented commit and pull request guidelines override anything in this section. Conventions inferred from its recent commits and merged pull requests decide only structure, formatting, and length.
 
 ## Write for a cold reader
 
