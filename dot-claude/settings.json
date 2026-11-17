@@ -1,7 +1,12 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "defaultMode": "auto"
   },
+  "model": "opus",
   "enabledPlugins": {
     "context7@anthropic-plugin-directory": true,
     "clangd-lsp@claude-plugins-official": true
@@ -20,10 +25,5 @@
   "autoCompactEnabled": true,
   "switchModelsOnFlag": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "model": "opus",
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+  "agentPushNotifEnabled": true
 }
