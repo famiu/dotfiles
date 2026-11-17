@@ -18,7 +18,11 @@
     },
     {
         "context": "Workspace",
-        "bindings": {}
+        "bindings": {
+        	// Swap bindings for toggling left and right dock.
+	        "ctrl-b": "workspace::ToggleRightDock",
+	        "ctrl-alt-b": "workspace::ToggleLeftDock"
+        }
     },
     {
         "context": "Editor",
@@ -27,7 +31,7 @@
     {
         "context": "Editor && !menu",
         "bindings": {
-            "ctrl-b": "workspace::ToggleLeftDock",
+            "ctrl-b": "workspace::ToggleRightDock",
             "ctrl-f": "buffer_search::Deploy"
         }
     },
