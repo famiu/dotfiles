@@ -76,6 +76,8 @@ if ! ((_ble_bash)); then
     bind '"\e[B":history-search-forward'
     bind '"\e[1;5C":forward-word'
     bind '"\e[1;5D":backward-word'
+    bind '"\C-h":backward-kill-word'
+    bind '"\e[3;5~":kill-word'
 fi
 
 # Aliases
